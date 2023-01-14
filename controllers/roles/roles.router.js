@@ -24,7 +24,7 @@ const authorize = require("./../../middleware/authorize");
  *         description: Role created successfully
  *   
  */ 
-router.post("/", authorize(["User"]), validateSchema(createRole), async (req, res) => {
+router.post("/", authorize(["User"]), validateSchema(createRole), async (req, res) => { // Access only to users how has access on Role and User Models for POST calls
     try {
         let role = await Role.create({
             roleName: req.body.role_name
