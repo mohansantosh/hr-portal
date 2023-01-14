@@ -1,3 +1,5 @@
+https://github.com/mohansantosh/hr-portal
+
 # hr-portal
 
 # Usage:
@@ -34,6 +36,5 @@ This has all the infra structure as below:
 
 # Authentication
     1. Create JWT Token by accessing POST /user/login with body username: admin and password: default
-    2. Set the JWT token the swagger by clicking on the Authorize button - So that every 
+    2. Set the JWT token the swagger by clicking on the Authorize button - So that every request is authenticated.
     3. Start Testing!!
-    

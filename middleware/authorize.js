@@ -6,9 +6,10 @@ module.exports = function(authzModels) {
         try {
             let allModels = [];
             //The route does not have any models specified. Don't authorize
-            if(!request.modelName && !authzModels) {
+            if(request.user.Role.roleName == "admin" || !request.modelName && !authzModels) {
                 next();
             }
+            
             let roleAllModelsPermissions = allRolesPermissions[request.user.Role.roleName];
 
             if(!(roleAllModelsPermissions)) {

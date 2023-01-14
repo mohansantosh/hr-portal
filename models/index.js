@@ -16,6 +16,7 @@ var dbConnObj = {
 };
 sequelize = new Sequelize(dbConnObj.database, dbConnObj.username, dbConnObj.password, dbConnObj);
 fs.readdirSync(__dirname).filter(file => {
+  console.log((file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3)), file);
   return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
 })
   .forEach(file => {

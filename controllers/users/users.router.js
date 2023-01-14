@@ -29,19 +29,19 @@ router.post('/login', async (req, res) => {
     try {
         let user = await User.findOne({
             where: {
-                username: req.body.username
+                username: req.body.username,
+                isActive: true
             },
             include: Role
         })
         if(!user) {
             res.send(401).send({
-                error: "Login Failed"
+                error: "Username is not present or inactive. Cannot login."
             });
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
-                const token = jwt.sign({id: user.id, role: user.Role.roleName}, 'your_jwt_secret');
-                res.status(200).send({
-                    message: "Login Successful",
+                const token = jwt.sign({id: user.id, role: user.Role.roleName}, 'your_jwt_secret', { expiresIn: '1d' });
+                res.status(201).send({
                     token
                 });
             } else {

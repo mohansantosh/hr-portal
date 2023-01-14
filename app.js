@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const db = require("./models");
-db.sequelize.sync()
+db.sequelize.sync({force: true})
   .then(() => {
     console.log("Synced db.");
     generateRouters(app);
@@ -21,7 +21,7 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "REST API Docs",
+      title: "Employee and HR REST API Docs",
       version: "3.0.0"
     },
     components: {

@@ -49,6 +49,7 @@ module.exports = function (sequelize, Sequelize) {
     });
     User.associate = function(models) {
         User.belongsTo(models["Role"])
+        User.belongsTo(models["Employee"])
     }
     return User;
 }

@@ -9,12 +9,16 @@ passport.use(new JwtStrategy({
 },
 function (jwtPayload, cb) {
     return User.findOne({
-        where: {
-            id: jwtPayload.id
-        },
-        include: Role
+            where: {
+                id: jwtPayload.id,
+                isActive: true
+            },
+            include: Role
         })
         .then(user => {
+            if(!user) {
+                throw new Error("User is inactive/blocked. Cannot access endpoint");
+            }
             return cb(null, user);
         })
         .catch(err => {
