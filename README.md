@@ -29,4 +29,11 @@ This has all the infra structure as below:
     4. Create model for "foo" in models as foo.js
     5. Define the model schema in models/foo.js
     6. Write your routes as per your needs in foo.router.js - post, patch, etc
-    7. npm start
+    7. Add necessary permissions for every role for that Model "foo" in config/roles_permissions.js
+    8. npm start
+
+# Authentication
+    1. Create JWT Token by accessing POST /user/login with body username: admin and password: default
+    2. Set the JWT token the swagger by clicking on the Authorize button - So that every 
+    3. Start Testing!!
+    
