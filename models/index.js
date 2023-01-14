@@ -10,7 +10,7 @@ var sequelize;
 var dbConnObj = {
   "username": "codex",
   "password": "default@123",
-  "database": "codexTestDb",
+  "database": "hr_portal",
   "host": "localhost",
   "dialect": "mysql"
 };
