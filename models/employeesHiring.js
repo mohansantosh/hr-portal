@@ -1,27 +1,27 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeHiring = sequelize.define('EmployeeHiring', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        email: {
             type: Sequelize.STRING,
             unique: true,
             allowNull: false
         },
-        clientInformation: {
-            type: Sequelize.STRING,
+        recruitmentMode: {
+            type: Sequelize.ENUM('offline', 'online'),
+            allowNull: false
         },
-        clientCode: {
-            type: Sequelize.STRING,
+        phoneNumber: {
+            type: Sequelize.STRING(10),
             unique: true,
-            allowNull: false
-        },
-
-        contactInformation: {
-            type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false            
         },
         createdAt: {
             type: Sequelize.DATE,
@@ -36,14 +36,16 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employees_hiring',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeHiring.associate = function(models) {
+        EmployeeHiring.hasOne(models["Employee"]);
+        EmployeeHiring.belongsTo(models["EmployeeHiringSource"]);
+        EmployeeHiring.hasMany(models["EmployeeHiringRound"]);
+        EmployeeHiring.belongsTo(models["SalesProjectNotification"]);
     }
-    return Client;
+    return EmployeeHiring;
 }

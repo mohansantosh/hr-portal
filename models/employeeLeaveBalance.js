@@ -1,27 +1,20 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeLeaveBalance = sequelize.define('EmployeeLeaveBalance', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
+        leaveBalance: {
             type: Sequelize.STRING,
             unique: true,
             allowNull: false
         },
-        clientInformation: {
-            type: Sequelize.STRING,
+        validFrom: {
+            type: Sequelize.DATE
         },
-        clientCode: {
-            type: Sequelize.STRING,
-            unique: true,
-            allowNull: false
-        },
-
-        contactInformation: {
-            type: Sequelize.STRING,
-            allowNull: false
+        validTo: {
+            type: Sequelize.DATE
         },
         createdAt: {
             type: Sequelize.DATE,
@@ -36,14 +29,14 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employee_leave_balance',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeLeaveBalance.associate = function(models) {
+        EmployeeLeaveBalance.belongsTo(models["LeaveType"]);
+        EmployeeLeaveBalance.belongsTo(models["Employee"]);
     }
-    return Client;
+    return EmployeeLeaveBalance;
 }

@@ -34,7 +34,7 @@ module.exports = function (sequelize, Sequelize) {
             allowNull: false
         },
         billingStatus: {
-            type: Sequelize.ENUM('in_billing', 'bench', 'yta_project'),
+            type: Sequelize.ENUM('in_billing', 'bench', 'yta_project', 'training'),
             default: 'yta_project'
         },
         createdAt: {
@@ -65,6 +65,14 @@ module.exports = function (sequelize, Sequelize) {
         Employee.belongsTo(models["WorkLocation"]);
         Employee.hasOne(models["EmployeeInfo"]);
         Employee.hasMany(models["EmployeeProject"]);
+        Employee.hasOne(models["EmployeeOfferDetail"]);
+        Employee.hasMany(models["EmployeeLoginLog"]);
+        Employee.belongsTo(models["EmployeeHiring"]);
+        Employee.hasMany(models["EmployeeHiringRound"]);
+        Employee.hasMany(models["EmployeeLeaveBalance"]);
+        Employee.hasMany(models["EmployeeLeaveApplication"]);
+        Employee.hasOne(models["ClientProject"]);
+        Employee.belongsToMany(models["SkillType"], {through: "employee_skills"});
     }
     return Employee;
 }

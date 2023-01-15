@@ -51,6 +51,11 @@ module.exports = function (sequelize, Sequelize) {
         ClientProject.belongsTo(models["Client"]);
         ClientProject.hasMany(models["EmployeeProject"]);
         ClientProject.belongsTo(models["GeoLocation"]);
+        ClientProject.belongsTo(models["Employee"], {
+            foreignKey: "projectManagerId"
+        })
+        ClientProject.belongsToMany(models["TechnologyType"], {through: "client_project_technologies"});
+        ClientProject.belongsToMany(models["SkillType"], {through: "client_project_skills"});
     }
     return ClientProject;
 }

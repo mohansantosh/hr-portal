@@ -1,26 +1,16 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeEducationHistory = sequelize.define('EmployeeEducationHistory', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
+        specialization: {
             type: Sequelize.STRING,
-            unique: true,
             allowNull: false
         },
-        clientInformation: {
-            type: Sequelize.STRING,
-        },
-        clientCode: {
-            type: Sequelize.STRING,
-            unique: true,
-            allowNull: false
-        },
-
-        contactInformation: {
-            type: Sequelize.STRING,
+        percentage: {
+            type: Sequelize.SMALLINT,
             allowNull: false
         },
         createdAt: {
@@ -36,14 +26,14 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employee_education_histories',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeEducationHistory.associate = function(models) {
+        EmployeeEducationHistory.belongsTo(models["EmployeeInfo"]);
+        EmployeeEducationHistory.belongsToMany(models["EducationType"], {through: "employee_education_history_types"});
     }
-    return Client;
+    return EmployeeEducationHistory;
 }

@@ -1,26 +1,27 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeLeaveApplication = sequelize.define('EmployeeLeaveApplication', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
-            type: Sequelize.STRING,
-            unique: true,
+        dayType: {
+            type: Sequelize.ENUM('half_day', 'full_day'),
             allowNull: false
         },
-        clientInformation: {
+        leaveReason: {
             type: Sequelize.STRING,
-        },
-        clientCode: {
-            type: Sequelize.STRING,
-            unique: true,
             allowNull: false
         },
-
-        contactInformation: {
-            type: Sequelize.STRING,
+        approvalStatus: {
+            type: Sequelize.ENUM('rejected', 'applied', 'approved')
+        },
+        leaveFrom: {
+            type: Sequelize.DATE,
+            allowNull: false
+        },
+        leaveTo: {
+            type: Sequelize.DATE,
             allowNull: false
         },
         createdAt: {
@@ -36,14 +37,14 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employee_leave_applications',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeLeaveApplication.associate = function(models) {
+        EmployeeLeaveApplication.belongsTo(models["Employee"]);
+        EmployeeLeaveApplication.belongsTo(models["LeaveType"]);
     }
-    return Client;
+    return EmployeeLeaveApplication;
 }

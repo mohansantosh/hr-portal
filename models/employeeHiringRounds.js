@@ -1,26 +1,27 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeHiringRound = sequelize.define('EmployeeHiringRound', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
-            type: Sequelize.STRING,
-            unique: true,
+        interviewRound: {
+            type: Sequelize.TINYINT,
             allowNull: false
         },
-        clientInformation: {
-            type: Sequelize.STRING,
-        },
-        clientCode: {
-            type: Sequelize.STRING,
-            unique: true,
+        feedback: {
+            type: Sequelize.ENUM('selected', 'rejected', 'hold'),
             allowNull: false
         },
-
-        contactInformation: {
+        interviewUrl: {
             type: Sequelize.STRING,
+            allowNull: false
+        },
+        comments: {
+            type: Sequelize.STRING
+        },
+        interviewDate: {
+            type: Sequelize.DATE,
             allowNull: false
         },
         createdAt: {
@@ -36,14 +37,16 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employee_hiring_rounds',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeHiringRound.associate = function(models) {
+        EmployeeHiringRound.belongsTo(models["EmployeeHiring"]);
+        EmployeeHiringRound.belongsTo(models["Employee"], {
+            foreignKey: "interviewerEmployeeId"
+        });
     }
-    return Client;
+    return EmployeeHiringRound;
 }

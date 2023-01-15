@@ -48,6 +48,21 @@ module.exports = function (sequelize, Sequelize) {
             unique: true,
             allowNull: false
         },
+        passportNo: {
+            type: Sequelize.STRING(8),
+        },
+        passportExpiryDate: {
+            type: Sequelize.DATE,
+        },
+        providentfundNo: {
+            type: Sequelize.STRING
+        },
+        uanNo: {
+            type: Sequelize.STRING
+        },
+        esiNo: {
+            type: Sequelize.STRING,
+        },
         gender: {
             type: Sequelize.ENUM('male', 'female', 'other')
         },
@@ -62,6 +77,9 @@ module.exports = function (sequelize, Sequelize) {
         },
         bloodGroup: {
             type: Sequelize.ENUM('o_positive', 'o_negative', 'a_positive', 'a_negative', 'b_postive', 'b_negative', 'ab_positive', 'ab_negative', 'other')
+        },
+        maritalStatus: {
+            type: Sequelize.ENUM('single', 'married')
         },
         updatedAt: {
             type: Sequelize.DATE,
@@ -79,6 +97,8 @@ module.exports = function (sequelize, Sequelize) {
     EmployeeInfo.associate = function(models) {
         EmployeeInfo.belongsTo(models["Employee"]);
         EmployeeInfo.hasOne(models["EmployeeBankDetail"]);
+        EmployeeInfo.hasMany(models["EmployeeEducationHistory"]);
+        EmployeeInfo.hasMany(models["EmployeeAddress"]);
     }
     return EmployeeInfo;
 }

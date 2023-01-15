@@ -1,25 +1,11 @@
 module.exports = function (sequelize, Sequelize) {
-    let Client = sequelize.define('Client', {
+    let EmployeeEmployerPayslip = sequelize.define('EmployeeEmployerPayslip', {
         id: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        clientName: {
-            type: Sequelize.STRING,
-            unique: true,
-            allowNull: false
-        },
-        clientInformation: {
-            type: Sequelize.STRING,
-        },
-        clientCode: {
-            type: Sequelize.STRING,
-            unique: true,
-            allowNull: false
-        },
-
-        contactInformation: {
+        payslipUrl: {
             type: Sequelize.STRING,
             allowNull: false
         },
@@ -36,14 +22,13 @@ module.exports = function (sequelize, Sequelize) {
     },
         {
             freezeTableName: true,
-            tableName: 'clients',
+            tableName: 'employee_employer_payslips',
             underscored: true
         }
     );
 
-    Client.associate = function(models) {
-        Client.belongsTo(models["ClientBusinessType"])
-        Client.hasMany(models["ClientProject"])
+    EmployeeEmployerPayslip.associate = function(models) {
+        EmployeeEmployerPayslip.belongsTo(models["EmployeeEmploymentHistory"]);
     }
-    return Client;
+    return EmployeeEmployerPayslip;
 }
