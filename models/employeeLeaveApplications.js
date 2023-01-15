@@ -1,34 +1,29 @@
 module.exports = function (sequelize, Sequelize) {
-  let EmployeeAddress = sequelize.define(
-    "EmployeeAddress",
+  let EmployeeLeaveApplication = sequelize.define(
+    "EmployeeLeaveApplication",
     {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      houseNo: {
+      dayType: {
+        type: Sequelize.ENUM("half_day", "full_day"),
+        allowNull: false,
+      },
+      leaveReason: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      streetName: {
-        type: Sequelize.STRING,
+      approvalStatus: {
+        type: Sequelize.ENUM("rejected", "applied", "approved"),
+      },
+      leaveFrom: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
-      city: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      district: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      state: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      pincode: {
-        type: Sequelize.INTEGER,
+      leaveTo: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       createdAt: {
@@ -44,13 +39,14 @@ module.exports = function (sequelize, Sequelize) {
     },
     {
       freezeTableName: true,
-      tableName: "employee_addresses",
+      tableName: "employee_leave_applications",
       underscored: true,
     }
   );
 
-  EmployeeAddress.associate = function (models) {
-    EmployeeAddress.belongsTo(models["EmployeeInfo"]);
+  EmployeeLeaveApplication.associate = function (models) {
+    EmployeeLeaveApplication.belongsTo(models["Employee"]);
+    EmployeeLeaveApplication.belongsTo(models["LeaveType"]);
   };
-  return EmployeeAddress;
+  return EmployeeLeaveApplication;
 };

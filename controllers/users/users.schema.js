@@ -1,4 +1,4 @@
-const {object, string} = require("zod")
+const { object, string } = require("zod");
 
 /**
  * @openapi
@@ -19,14 +19,14 @@ const {object, string} = require("zod")
  *                  example: default
  */
 const LoginUser = object({
-    body: object({
-        username: string({
-            required_error: "id is required"
-        }).minLength(4),
-        password: string({
-            required_error: "id is required"
-        }).minLength(6)
-    })
+  body: object({
+    username: string({
+      required_error: "id is required",
+    }).minLength(4),
+    password: string({
+      required_error: "id is required",
+    }).minLength(6),
+  }),
 });
 
 module.exports = LoginUser;

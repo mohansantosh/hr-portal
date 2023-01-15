@@ -18,8 +18,12 @@ module.exports = function (sequelize, Sequelize) {
             unique: true,
             allowNull: false
         },
-
-        contactInformation: {
+        email: {
+            type: Sequelize.STRING,
+            unique: true,
+            allowNull: false            
+        },
+        phoneNumber: {
             type: Sequelize.STRING,
             allowNull: false
         },
