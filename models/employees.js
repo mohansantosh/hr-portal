@@ -53,6 +53,12 @@ module.exports = function (sequelize, Sequelize) {
       freezeTableName: true,
       tableName: "employees",
       underscored: true,
+      indexes: [
+        {
+          unique: true,
+          fields: ["employee_code", "work_email", "personal_phone_number"],
+        },
+      ],
     }
   );
 

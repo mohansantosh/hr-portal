@@ -1,5 +1,5 @@
 "use strict";
-export default function (sequelize, Sequelize) {
+module.exports = function (sequelize, Sequelize) {
   let WorkLocation = sequelize.define(
     "WorkLocation",
     {
@@ -53,4 +53,4 @@ export default function (sequelize, Sequelize) {
     WorkLocation.hasMany(models.Employee);
   };
   return WorkLocation;
-}
+};

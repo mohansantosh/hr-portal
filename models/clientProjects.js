@@ -62,6 +62,7 @@ module.exports = function (sequelize, Sequelize) {
     ClientProject.belongsToMany(models["SkillType"], {
       through: "client_project_skills",
     });
+    ClientProject.hasMany(models["ClientProjectDoc"]);
   };
   return ClientProject;
 };

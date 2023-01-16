@@ -7,7 +7,7 @@ module.exports = function (sequelize, Sequelize) {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      dayType: {
+      leaveType: {
         type: Sequelize.ENUM("half_day", "full_day"),
         allowNull: false,
       },

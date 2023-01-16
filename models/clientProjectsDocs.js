@@ -1,18 +1,18 @@
 module.exports = function (sequelize, Sequelize) {
-  let EmployeeEducationHistory = sequelize.define(
-    "EmployeeEducationHistory",
+  let ClientProjectDoc = sequelize.define(
+    "ClientProjectDoc",
     {
       id: {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      specialization: {
+      docUrl: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      percentage: {
-        type: Sequelize.TINYINT,
+      docDescription: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       createdAt: {
@@ -28,16 +28,13 @@ module.exports = function (sequelize, Sequelize) {
     },
     {
       freezeTableName: true,
-      tableName: "employee_education_histories",
+      tableName: "client_project_docs",
       underscored: true,
     }
   );
 
-  EmployeeEducationHistory.associate = function (models) {
-    EmployeeEducationHistory.belongsTo(models["EmployeeInfo"]);
-    EmployeeEducationHistory.belongsToMany(models["EducationType"], {
-      through: "employee_education_history_types",
-    });
+  ClientProjectDoc.associate = function (models) {
+    ClientProjectDoc.belongsTo(models["ClientProject"]);
   };
-  return EmployeeEducationHistory;
+  return ClientProjectDoc;
 };

@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 const db = require("./models");
 db.sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Synced db.");
     generateRouters(app);

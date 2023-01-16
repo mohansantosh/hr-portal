@@ -12,16 +12,6 @@ module.exports = function (sequelize, Sequelize) {
         unique: true,
         allowNull: false,
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn("now"),
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn("now"),
-      },
     },
     {
       freezeTableName: true,
