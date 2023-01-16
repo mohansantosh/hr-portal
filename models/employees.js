@@ -80,6 +80,8 @@ module.exports = function (sequelize, Sequelize) {
     Employee.hasMany(models["EmployeeLeaveApplication"]);
     Employee.hasOne(models["ClientProject"]);
     Employee.belongsToMany(models["SkillType"], { through: "employee_skills" });
+    Employee.belongsTo(models["CompanyDepartment"]);
+    Employee.belongsTo(models["DesignationBand"]);
   };
   return Employee;
 };
