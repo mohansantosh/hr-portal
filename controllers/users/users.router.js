@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
       include: Role,
     });
     if (!user) {
-      res.send(401).send({
+      res.status(401).send({
         error: "Username is not present or inactive. Cannot login.",
       });
     } else {
@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
           token,
         });
       } else {
-        res.send(401).send({
+        res.status(401).send({
           error: "Login Failed",
         });
       }
@@ -97,12 +97,21 @@ router.post("/signup", async (req, res) => {
         username: req.body.username,
         password: req.body.password,
       });
+      let role = await Role.findOne({
+        where: {
+          roleName: "user",
+        },
+      });
+      if (role) {
+        await role.addUser(user);
+      }
       res.status(200).send({
         username: user.username,
         message: "User created successfully",
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).send({
       error: error.errors,
     });

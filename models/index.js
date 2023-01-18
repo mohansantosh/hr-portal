@@ -4,15 +4,16 @@ var fs = require("fs");
 var path = require("path");
 var Sequelize = require("sequelize");
 var basename = path.basename(__filename);
+var databaseConfig = require("./../config/config.json");
 var db = {};
 var sequelize;
 
 var dbConnObj = {
-  username: "codex",
-  password: "default@123",
-  database: "hr_portal",
-  host: "localhost",
-  dialect: "mysql",
+  username: databaseConfig.development.username,
+  password: databaseConfig.development.password,
+  database: databaseConfig.development.database,
+  host: databaseConfig.development.host,
+  dialect: databaseConfig.development.dialect,
 };
 sequelize = new Sequelize(
   dbConnObj.database,

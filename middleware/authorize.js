@@ -10,12 +10,11 @@ module.exports = function (authzModels) {
         request.user.Role.roleName == "admin" ||
         (!request.modelName && !authzModels)
       ) {
-        next();
+        return next();
       }
 
       let roleAllModelsPermissions =
         allRolesPermissions[request.user.Role.roleName];
-
       if (!roleAllModelsPermissions) {
         throw new Error("Permissions not available for the user's role");
       }
@@ -35,12 +34,11 @@ module.exports = function (authzModels) {
       });
 
       if (result) {
-        next();
+        return next();
       } else {
         throw new Error("Access Denied");
       }
     } catch (error) {
-      console.log(error);
       response.status(403).send({
         error: error.message,
       });

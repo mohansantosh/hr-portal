@@ -10,8 +10,8 @@ module.exports = {
       DELETE,
       PATCH,
       PUT,
-      GET,
       POST,
+      GET,
     },
     User: {
       POST,
@@ -21,7 +21,17 @@ module.exports = {
       GET,
     },
   },
-  human_resource: {
+
+  human_resources: {
+    Role: {
+      POST,
+      GET,
+    },
+    User: {
+      GET,
+    },
+  },
+  user: {
     Role: {
       GET,
     },

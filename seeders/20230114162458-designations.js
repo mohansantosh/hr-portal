@@ -7,14 +7,20 @@ module.exports = {
       {
         id: crypto.randomUUID(),
         designation_name: "Sr Software Engineer",
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         id: crypto.randomUUID(),
         designation_name: "Software Engineer",
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         id: crypto.randomUUID(),
         designation_name: "Manager",
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     ]);
   },

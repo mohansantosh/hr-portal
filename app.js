@@ -21,7 +21,7 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Employee and HR REST API Docs",
+      title: "Business Suite REST API Docs",
       version: "3.0.0",
     },
     components: {

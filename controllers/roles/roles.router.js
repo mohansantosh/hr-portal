@@ -56,18 +56,17 @@ router.post(
  *     description: Get all roles
  *     responses:
  *       200:
- *         description: Role created successfully
+ *         description: Roles fetched  successfully
  *
  */
-router.get("/", authorize(), async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let roles = await Role.findAll();
-    res.status(200).send({
-      roles,
-    });
+    res.status(200).send(roles);
   } catch (error) {
+    console.log("error>>>>>", error);
     res.status(500).send({
-      error: "Error creating the role",
+      error: "Error getting the role",
     });
   }
 });
