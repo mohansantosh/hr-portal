@@ -1,6 +1,6 @@
 https://github.com/mohansantosh/hr-portal
 
-# hr-portal
+# Backend to develop Business Suite Web Application
 
 # Usage:
     npm install
